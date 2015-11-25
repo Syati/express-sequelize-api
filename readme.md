@@ -33,7 +33,7 @@ $ docker-compose up
 
 ```
 
-Access the access http://url:3000/docs/api with browser
+Access http://[your url]:3000/docs/api with browser
 
 ## Lib
 
