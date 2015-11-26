@@ -1,23 +1,24 @@
 data:
   image: busybox:latest
+  command: 'true'
   volumes:
-    - /opt/dbdata
+    - /etc/postgresql
+    - /var/log/postgresql
+    - /var/lib/postgresql
+    - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    - .:/app
 db:
   image: postgres:latest
-  volumes:
-    - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
   volumes_from:
     - data
   ports:
     - "5432:5432"
 web:
   build: .
-  volumes:
-    - .:/app
+  volumes_from:
+    - data
   ports:
     - "3000:3000"
     - "35729:35729"    
   links:
     - db
-
-  
